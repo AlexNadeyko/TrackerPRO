@@ -12,6 +12,7 @@
     <color name="my_light_black">#191919</color>
     <color name="my_orange">#fb472f</color>
     <color name="my_white">#FFFFFFFF</color>
+    <color name="my_grey">#727375</color>
 
 
 </resources>

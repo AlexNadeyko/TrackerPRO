@@ -1,14 +1,23 @@
 package com.example.trackerpro
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 
-class WelcomeActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
+
+    private val SPLASH_TIME_OUT:Long = 4000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
-//        Thread.sleep(10000)
-//
-//        setContentView(R.layout.activity_tracking)
+        setContentView(R.layout.activity_splash)
+
+        Handler().postDelayed({
+            startActivity(Intent(this, TrackingActivity::class.java))
+
+            finish()
+        }, SPLASH_TIME_OUT)
+
     }
 }

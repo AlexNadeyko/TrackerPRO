@@ -2,5 +2,7 @@
     <string name="app_name">TrackerPro</string>
     <string name="welcome_string_1">Tracker</string>
     <string name="welcome_string_2">Pro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="BottomNavigationViewSize" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">12sp</item>
     </style>
@@ -7,4 +8,12 @@
     <style name="BottomNavigationViewSize.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@color/my__black</item>
+        <item name="tabIndicatorColor">@color/my_orange</item>
+        <item name="tabTextColor">@color/my_grey</item>
+        <item name="tabSelectedTextColor">@color/my_white</item>
+    </style>
+
 </resources>

@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/my__black"
-    tools:context=".ClassicModeFragment">
+    tools:context=".CaloriesModeFragment">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="296dp"
-        android:text="Classic mode"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="308dp"
+        android:text="Calories mode"
         android:textColor="@color/my_orange"
         android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"

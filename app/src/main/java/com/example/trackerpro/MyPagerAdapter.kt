@@ -3,25 +3,22 @@ package com.example.trackerpro
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.RecyclerView
 
-class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm)
-{
+class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int) : Fragment {
         return when (position){
             0 -> {
                 ClassicModeFragment()
             }
             1 -> {
-//                DistanceModeFragment()
-                ClassicModeFragment()
+                DistanceModeFragment()
             }
             2 -> {
-//                TimeModeFragment()
-                ClassicModeFragment()
+                TimeModeFragment()
             }
             else -> {
-                return ClassicModeFragment()
-//                return CaloriesModeFragment()
+                return CaloriesModeFragment()
             }
         }
     }

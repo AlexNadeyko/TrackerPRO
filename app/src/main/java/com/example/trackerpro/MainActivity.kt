@@ -16,8 +16,6 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-//        loadFragment(TrackerFragment())
-
         val navigationMenuView: BottomNavigationView = findViewById(R.id.navigationView)
 
         val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
@@ -51,55 +49,7 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-
         navigationMenuView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener )
 
-
-
-//        navigationMenuView.setOnNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.navigation_tracker -> {
-//                    loadFragment(TrackerFragment())
-//                    return@setOnNavigationItemSelectedListener true
-//                }
-//
-//                R.id.navigation_statisctics -> {
-//
-////                    loadFragment(com.example.trackerpro.StatisticsFragment())
-//                    loadFragment(TrackerFragment())
-//                    return@setOnNavigationItemSelectedListener true
-//                }
-//
-//                R.id.navigation_ranking -> {
-//
-////                    loadFragment(RankingFragment())
-//                    loadFragment(TrackerFragment())
-//                    return@setOnNavigationItemSelectedListener true
-//                }
-//
-//                R.id.navigation_profile -> {
-//
-////                    loadFragment(ProfileFragment())
-//
-//                    loadFragment(TrackerFragment())
-//                    return@setOnNavigationItemSelectedListener true
-//                }
-//
-//            }
-//            false
-//
-//        }
     }
-
-//    private fun loadFragment(fragment: Fragment) {
-//        // load fragment
-////        val transaction = supportFragmentManager.beginTransaction()
-////        transaction.replace(R.id.container, fragment)
-////        transaction.addToBackStack(null)
-////        transaction.commit()
-//
-//        supportFragmentManager.beginTransaction().replace(R.id.container, fragment, fragment.javaClass.getSimpleName())
-//            .commit()
-//    }
-
 }

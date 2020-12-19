@@ -9,14 +9,266 @@
 
 
     <TextView
+        android:id="@+id/textViewSpeedLabelDistanceMode"
+        style="@style/MyTextViewTrackerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="296dp"
-        android:text="Distance mode"
-        android:textColor="@color/my_orange"
-        android:textSize="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="128dp"
+        android:text="@string/speed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <TextView
+        android:id="@+id/textViewSpeedCounterDistanceMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="92dp"
+        android:text="@string/default_speed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSpeedLabelDistanceMode" />
+
+    <TextView
+        android:id="@+id/textViewAverageSpeedDistanceMode"
+        style="@style/MyTextViewTrackerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="52dp"
+        android:text="@string/average_speed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline13" />
+
+    <TextView
+        android:id="@+id/textViewAverageSpeedCounterDistanceMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="92dp"
+        android:text="@string/default_avg_speed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAverageSpeedDistanceMode" />
+
+    <TextView
+        android:id="@+id/textViewCaloriesLabelDistanceMode"
+        style="@style/MyTextViewTrackerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/calories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline13" />
+
+    <TextView
+        android:id="@+id/textViewCaloriesCounterDistanceMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/default_calories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCaloriesLabelDistanceMode" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupDistanceMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="90dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10">
+
+        <!--            android:onClick="onRadioButtonClicked"-->
+        <!--            android:text="@string/pirates" />-->
+
+        <RadioButton
+            android:id="@+id/radioButtonWalkDistanceMode"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:background="@drawable/radio_button_selector_walk"
+            android:button="@android:color/transparent" />
+
+        <RadioButton
+            android:id="@+id/radioButtonRunDistanceMode"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+
+            android:background="@drawable/radio_button_selector_run"
+            android:button="@android:color/transparent"
+            tools:layout_editor_absoluteX="206dp"
+            tools:layout_editor_absoluteY="462dp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonBicycleDistanceMode"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:background="@drawable/radio_button_selector_bicycle"
+            android:button="@android:color/transparent" />
+        <!--            android:onClick="onRadioButtonClicked"-->
+        <!--            android:text="@string/ninjas" />-->
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewActivityDistanceMode"
+        style="@style/MyTextViewTrackerLabel"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/activity"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroupDistanceMode"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+    <ProgressBar
+        android:id="@+id/progressBarDistance"
+        style="@style/MyProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="25sp"
+        android:layout_marginTop="24dp"
+
+        android:background="@color/my__black"
+        android:progressBackgroundTint="@color/my_light_black"
+        android:progressTint="@color/my_orange"
+        android:scrollbarSize="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@color/my_light_black"
+        android:ems="8"
+        android:inputType="number"
+        android:textColor="@color/my_white"
+        android:textColorHighlight="@color/my_orange"
+        android:textColorLink="@color/my_orange"
+
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.305"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/textViewDistanceLabel"
+        style="@style/MyTextViewTrackerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/distance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="62dp" />
+
+    <TextView
+        android:id="@+id/textViewUnitMeters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/meters"
+        android:textColor="@color/my_orange"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberDistance"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="303dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/my_orange"
+        android:text="@string/start_tracking"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="481dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="303dp"
+        android:layout_height="46dp"
+        android:backgroundTint="@color/my_orange"
+        android:enabled="false"
+        android:text="@string/stop_tracking"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="381dp" />
+
+    <TextView
+        android:id="@+id/textViewTimeCounterDistanceMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/time_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimeLabelDistanceMode" />
+
+    <TextView
+        android:id="@+id/textViewTimeLabelDistanceMode"
+        style="@style/MyTextViewTrackerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="173dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="283dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

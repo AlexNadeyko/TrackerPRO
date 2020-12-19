@@ -10,17 +10,22 @@
     <string name="stop_tracking">Stop</string>
     <string name="pause_tracking">Pause</string>
     <string name="continue_tracking">Continue</string>
-    <string name="time_empty">00:00:00</string>
+    <string name="time_default">00:00:00</string>
 
     <string name="distance">distance</string>
     <string name="speed">speed</string>
     <string name="calories">calories</string>
     <string name="average_speed">average speed</string>
+    <string name="time">time</string>
 
     <string name="default_distance">0 m</string>
     <string name="default_speed">0 km/h</string>
     <string name="default_avg_speed">0 km/h</string>
     <string name="default_calories">0 kcal</string>
     <string name="activity">activity:</string>
+
+    <string name="meters">m</string>
+
+
 
 </resources>

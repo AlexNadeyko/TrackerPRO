@@ -16,4 +16,26 @@
         <item name="tabSelectedTextColor">@color/my_white</item>
     </style>
 
+    <style name="MyButton" parent="android:style/Widget.Button">
+
+        <item name="android:textColor">@color/my_white</item>
+        <item name="android:background">@color/my_orange</item>
+    </style>
+
+    <style name="MyTextViewTrackerLabel" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/my_orange</item>
+<!--        <item name="android:textStyle"></item>-->
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="MyTextViewTrackerCounter" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/my_white</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="MyProgressBar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:drawable">@drawable/progress_bar_drawable</item>
+    </style>
+
 </resources>

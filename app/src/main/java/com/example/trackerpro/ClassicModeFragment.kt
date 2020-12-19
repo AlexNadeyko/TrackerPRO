@@ -161,7 +161,7 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
 
                 if (isFinish){
                     isFinish = false
-                    textViewStopWatch.text = getString(R.string.time_empty)
+                    textViewStopWatch.text = getString(R.string.time_default)
                     seconds = 0
                 }
 

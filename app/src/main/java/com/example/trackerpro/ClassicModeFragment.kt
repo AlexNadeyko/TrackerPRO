@@ -34,6 +34,8 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sManager = context?.getSystemService(SensorManager::class.java)
+
+        runTimer()
 //        val sManager: SensorManager? = context?.getSystemService(SensorManager::class.java)
 //        print(sManager)
 //        val sManager = getSystemService(context, SensorManager::class.java)
@@ -79,7 +81,9 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
                                 minutes, secs)
 
                 // Set the text view text.
-                textViewStopwatch.text = time
+                if (textViewStopwatch != null) {
+                    textViewStopwatch.text = time
+                }
 
                 // If running is true, increment the
                 // seconds variable.
@@ -125,6 +129,26 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
         val buttonStopTracking = view.findViewById<Button>(R.id.buttonStopTracking)
         val textViewStopWatch = view.findViewById<TextView>(R.id.textViewStopwatch)
 
+        if (running){
+            val hours = seconds / 3600
+            val minutes = seconds % 3600 / 60
+            val secs = seconds % 60
+
+            val time: String = java.lang.String
+                    .format(Locale.getDefault(),
+                            "%02d:%02d:%02d", hours,
+                            minutes, secs)
+
+            textViewStopWatch.text = time
+
+            buttonStartTracking.text = getString(R.string.pause_tracking)
+            buttonStopTracking.isEnabled = true
+        }
+
+
+
+
+
         buttonStartTracking.setOnClickListener {
 
 
@@ -157,7 +181,7 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
 
         }
 
-        runTimer()
+//        runTimer()
 
         return view
     }

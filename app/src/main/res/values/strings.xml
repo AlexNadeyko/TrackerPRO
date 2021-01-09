@@ -24,7 +24,14 @@
     <string name="default_calories">0 kcal</string>
     <string name="activity">activity:</string>
 
+    <string name="minutes">min</string>
+    <string name="hours">h</string>
+    <string name="seconds">sec</string>
+
     <string name="meters">m</string>
+
+    <string name="hint_default_part_time">00</string>
+    <string name="hint_enter_distance">Enter distance</string>
 
 
 

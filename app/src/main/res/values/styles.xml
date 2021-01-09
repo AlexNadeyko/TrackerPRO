@@ -38,4 +38,12 @@
         <item name="android:drawable">@drawable/progress_bar_drawable</item>
     </style>
 
+    <style name="MyEditTextTheme">
+        <item name="colorControlNormal">@color/my_light_black</item>
+        <item name="colorControlActivated">@color/my_orange</item>
+        <item name="colorControlHighlight">#FFFFFF</item>
+    </style>
+
+
+
 </resources>

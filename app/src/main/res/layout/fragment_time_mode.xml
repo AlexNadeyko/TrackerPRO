@@ -7,16 +7,340 @@
     android:background="@color/my__black"
     tools:context=".TimeModeFragment">
 
-
     <TextView
+        android:id="@+id/textViewDistanceTimeMode"
+        style="@style/MyTextViewTrackerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="296dp"
-        android:text="Time mode"
-        android:textColor="@color/my_orange"
-        android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/distance"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
+    <TextView
+        android:id="@+id/textViewDistanceCounterTimeMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/default_distance"
+        app:layout_constraintStart_toEndOf="@+id/textViewDistanceTimeMode"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/textViewCaloriesCounterTimeMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/default_calories"
+        app:layout_constraintStart_toEndOf="@+id/textViewCaloriesLabelTimeMode"
+        app:layout_constraintTop_toTopOf="@+id/guideline17" />
+
+    <TextView
+        android:id="@+id/textViewCaloriesLabelTimeMode"
+        style="@style/MyTextViewTrackerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/calories"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toTopOf="@+id/guideline17" />
+
+    <TextView
+        android:id="@+id/textViewAverageSpeedCounterTimeMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/default_avg_speed"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAverageSpeedTimeMode" />
+
+    <TextView
+        android:id="@+id/textViewSpeedLabelTimeMode"
+        style="@style/MyTextViewTrackerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/speed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+    <TextView
+        android:id="@+id/textViewSpeedCounterTimeMode"
+        style="@style/MyTextViewTrackerCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/default_speed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSpeedLabelTimeMode" />
+
+    <TextView
+        android:id="@+id/textViewAverageSpeedTimeMode"
+        style="@style/MyTextViewTrackerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/average_speed"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+    <TextView
+        android:id="@+id/textViewActivityTimeMode"
+        style="@style/MyTextViewTrackerLabel"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/activity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTimeMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/textViewActivityTimeMode"
+        app:layout_constraintTop_toTopOf="@+id/guideline12">
+
+        <!--            android:onClick="onRadioButtonClicked"-->
+        <!--            android:text="@string/pirates" />-->
+
+        <RadioButton
+            android:id="@+id/radioButtonWalkTimeMode"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/radio_button_selector_walk"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            tools:layout_editor_absoluteX="288dp"
+            tools:layout_editor_absoluteY="294dp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonRunTimeMode"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/radio_button_selector_run"
+            android:button="@android:color/transparent"
+            tools:layout_editor_absoluteX="338dp"
+            tools:layout_editor_absoluteY="294dp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonBicycleTimeMode"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/radio_button_selector_bicycle"
+            android:button="@android:color/transparent"
+            tools:layout_editor_absoluteX="388dp"
+            tools:layout_editor_absoluteY="294dp" />
+        <!--            android:onClick="onRadioButtonClicked"-->
+        <!--            android:text="@string/ninjas" />-->
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonStopTrackingDistanceMode2"
+        android:layout_width="303dp"
+        android:layout_height="46dp"
+        android:backgroundTint="@color/my_orange"
+        android:enabled="false"
+        android:text="@string/stop_tracking"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartTrackingTimeMode" />
+
+    <Button
+        android:id="@+id/buttonStartTrackingTimeMode"
+        android:layout_width="303dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/my_orange"
+        android:text="@string/start_tracking"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
+    <EditText
+        android:id="@+id/editTextNumberHours"
+        android:layout_width="45dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        android:ems="2"
+        android:gravity="right"
+        android:hint="@string/hint_default_part_time"
+        android:inputType="number"
+        android:textColor="@color/my_white"
+        android:textColorHint="@color/my_grey"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textSize="30sp"
+        android:theme="@style/MyEditTextTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="115dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="246dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="365dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="434dp" />
+
+    <TextView
+        android:id="@+id/textViewHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/hours"
+        android:textColor="@color/my_orange"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberHours"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <TextView
+        android:id="@+id/textViewMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/minutes"
+        android:textColor="@color/my_orange"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberMinutes"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <TextView
+        android:id="@+id/textViewSeconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/seconds"
+        android:textColor="@color/my_orange"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberSeconds"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <EditText
+        android:id="@+id/editTextNumberMinutes"
+        android:layout_width="43dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="12dp"
+        android:ems="2"
+        android:gravity="right"
+        android:hint="@string/hint_default_part_time"
+        android:inputType="number"
+        android:textColor="@color/my_white"
+        android:textColorHint="@color/my_grey"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textSize="30sp"
+        android:theme="@style/MyEditTextTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <EditText
+        android:id="@+id/editTextNumberSeconds"
+        android:layout_width="40dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="16dp"
+        android:ems="2"
+        android:gravity="right"
+        android:hint="@string/hint_default_part_time"
+        android:inputType="number"
+        android:textColor="@color/my_white"
+        android:textColorHint="@color/my_grey"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textSize="30sp"
+        android:theme="@style/MyEditTextTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="136dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="4dp"
+        android:progress="80"
+        android:progressBackgroundTint="@color/my_white"
+        android:progressDrawable="@drawable/circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="193dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="163dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

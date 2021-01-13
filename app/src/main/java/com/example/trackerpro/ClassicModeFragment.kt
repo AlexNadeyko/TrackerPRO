@@ -1,127 +1,297 @@
 package com.example.trackerpro
 
 
-//import android.content.Context.getSystemService
-//import androidx.core.content.Context.getSystemService
-//import androidx.core.content.ContextCompat.getSystemService
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
+import android.content.pm.PackageManager
 import android.hardware.SensorManager
+import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.fragment_classic_mode.*
 import java.util.*
 
+enum class FormOfActivity {
+    WALK, RUN, BICYCLE
+}
 
-class ClassicModeFragment : Fragment(), SensorEventListener {
+class ClassicModeFragment : Fragment() {
 
     private var seconds: Int = 0
+    private var secondsAfterLocationWasFound: Int = 0
     private var running: Boolean = false
     private var isPause: Boolean = false
     private var isFinish: Boolean = false
+    private var isNewSession = false
     private var wasRunning: Boolean = false
     private var sManager: SensorManager? = null
-//    private var stepSensor: Sensor = sManager!!.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
+    private var currentLocationPoint: LocationPoint? = null
+    private var trackerAnalyzer: TrackerAnalyzer? = null
+
+    private var distance: Float = 0f
+    private var speed: Float = 0f
+    private var calories: Float = 0f
+    private lateinit var formOfActivity: FormOfActivity
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var lastLocation: Location
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+
+    private lateinit var textViewDistance: TextView
+    private lateinit var textViewSpeed: TextView
+    private lateinit var textViewAverageSpeed: TextView
+    private lateinit var textViewCalories: TextView
+    private lateinit var radioButtonWalk: RadioButton
+    private lateinit var radioButtonRun: RadioButton
+    private lateinit var radioButtonBicycle: RadioButton
+
+    private var locationWasChanged: Boolean = false
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sManager = context?.getSystemService(SensorManager::class.java)
 
+        trackerAnalyzer = TrackerAnalyzer(context!!)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
+
+        isNewSession = true
+
+//        getLastKnownLocation()
+        getLocationUpdates()
+        startLocationUpdates()
         runTimer()
-//        val sManager: SensorManager? = context?.getSystemService(SensorManager::class.java)
-//        print(sManager)
-//        val sManager = getSystemService(context, SensorManager::class.java)
-//        val stepSensor: Sensor = sManager!!.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
-//        print(stepSensor)
-//        buttonStartTracking.setOnClickListener { running = true }
-
-//        buttonStartTracking.setOnClickListener(object : View.OnClickListener {
-//            override fun onClick(view: View?) {
-//                running = true
-//            }
-//
-//        })
-//
-//        runTimer()
     }
 
-        private fun runTimer() {
+    private fun getLocationUpdates() {
 
-        // Get the text view.
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
+        locationRequest = LocationRequest()
+        locationRequest.interval = 3000
+        locationRequest.fastestInterval = 2000
+        locationRequest.smallestDisplacement = 2f
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+
+                if (locationResult.locations.isNotEmpty()) {
+                    // get latest location
+                    val location =
+                            locationResult.lastLocation
+
+                    var newLocationPoint: LocationPoint = LocationPoint(location, seconds)
+
+                    if (currentLocationPoint==null){
+                        currentLocationPoint = newLocationPoint
+                        Log.e("getLocationUpdates: startlocation - ", location.latitude.toString() + " " + location.longitude.toString())
+                    }else{
+                        if (running){
+                            trackerAnalyzer?.setPoints(currentLocationPoint!!, newLocationPoint)
+                            trackerAnalyzer?.analyze()
+
+                            secondsAfterLocationWasFound = seconds
+                            distance += trackerAnalyzer!!.distance
+
+                            val distanceString: String = java.lang.String
+                                    .format(
+                                            Locale.getDefault(),
+                                            "%.0f m", distance
+                                    )
+
+                            val speedString: String = java.lang.String
+                                    .format(
+                                            Locale.getDefault(),
+                                            "%.1f km/h", convertSpeedFromMSecToKmH(trackerAnalyzer!!.speed)
+                                    )
+                            speed = trackerAnalyzer!!.speed
+
+                            textViewDistance.text = distanceString
+                            textViewSpeed.text = speedString
+
+                            locationWasChanged = true
+                            Log.e("Distance",distanceString )
+                            Log.e("Speed",speedString )
+                        }
+
+                        currentLocationPoint = newLocationPoint
+                        Log.e("getLocationUpdates: secondlocation - ", location.latitude.toString() + " " + location.longitude.toString())
+
+                    }
+                    Toast.makeText(context, "getLocationUpdates: " + location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
+
+//                    Log.e("newLocationPoint", newLocationPoint.location.altitude.toString())
+
+                }
+            }
+        }
+    }
+
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(context!!,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity!!,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            Log.e("startLocationUpdates", "it doesn't go")
+            return
+        }
+
+        Log.e("startLocationUpdates", "it goes")
+
+        fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                null
+        )
+    }
+
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    // stop receiving location update when activity not visible/foreground
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+    // start receiving location update when activity visible/foreground
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    fun getLastKnownLocation() {
+        if (ActivityCompat.checkSelfPermission(context!!,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity!!,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            Log.e("getLastKnownLocation", "it doesn't go")
+            return
+        }
+
+        Log.e("getLastKnownLocation", "it goes")
+
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location->
+                if (location != null) {
+                    lastLocation = location
+//                val currentLatLng = LatLng(location.latitude, location.longitude)
+                    Toast.makeText(context, location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
+                    Log.e("LastLocation", location.latitude.toString() + " " + location.longitude.toString())
+                }else{
+                    Log.e("LastLocation", "null")
+                }
 
 
-        // Creates a new Handler
+            }
+
+    }
+
+    private fun displayValuesOfTracking(){
+//        if (locationWasChanged){
+//            locationWasChanged = false
+//        }else{
+//            val speed1: String = java.lang.String
+//                    .format(
+//                            Locale.getDefault(),
+//                            "%.1f km/h", 0f
+//                    )
+//
+//            Log.e("Speed",speed1 )
+//            textViewSpeed.text = speed1
+//        }
+
+        if (seconds - secondsAfterLocationWasFound >= 8) {
+
+            val speedString: String = java.lang.String
+                    .format(
+                            Locale.getDefault(),
+                            "%.1f km/h", 0f
+                    )
+
+            Log.e("Speed", speedString)
+            textViewSpeed.text = speedString
+            speed = 0f
+        }
+
+        val averageSpeed: String = java.lang.String
+                .format(
+                        Locale.getDefault(),
+                        "%.1f km/h", convertSpeedFromMSecToKmH((distance / seconds).toFloat())
+                )
+
+        textViewAverageSpeed.text = averageSpeed
+
+        var caloriesTemp: Float = 0f
+        if (formOfActivity == FormOfActivity.WALK) {
+            caloriesTemp = calculateCaloriesWalking(speed)
+            calories += caloriesTemp
+        }else if(formOfActivity == FormOfActivity.RUN) {
+            caloriesTemp = calculateCaloriesRunning(distance)
+            calories = caloriesTemp
+        }
+        else if(formOfActivity == FormOfActivity.BICYCLE){
+            caloriesTemp = calculateCaloriesBicycle(seconds)
+            calories = caloriesTemp
+        }
+
+        textViewCalories.text = java.lang.String
+                .format(
+                        Locale.getDefault(),
+                        "%.0f kcal", calories
+                )
+    }
+
+    private fun runTimer() {
+
         val handler = Handler()
 
-        // Call the post() method,
-        // passing in a new Runnable.
-        // The post() method processes
-        // code without a delay,
-        // so the code in the Runnable
-        // will run almost immediately.
         handler.post(object : Runnable {
             override fun run() {
                 val hours = seconds / 3600
                 val minutes = seconds % 3600 / 60
                 val secs = seconds % 60
 
-                // Format the seconds into hours, minutes,
-                // and seconds.
                 val time: String = java.lang.String
-                        .format(Locale.getDefault(),
-                                "%02d:%02d:%02d", hours,
-                                minutes, secs)
+                    .format(
+                        Locale.getDefault(),
+                        "%02d:%02d:%02d", hours,
+                        minutes, secs
+                    )
 
-                // Set the text view text.
                 if (textViewStopwatch != null) {
                     textViewStopwatch.text = time
                 }
 
-                // If running is true, increment the
-                // seconds variable.
                 if (running) {
                     seconds++
+                    displayValuesOfTracking()
                 }
 
-                // Post the code again
-                // with a delay of 1 second.
                 handler.postDelayed(this, 1000)
             }
         })
     }
 
-//    private fun runStepCounter(){
-//        val handler = Handler()
-//
-//        handler.post(object : Runnable {
-//            override fun run() {
-//
-//                while (running){
-//
-//                    textViewDistanceCounter =
-//                }
-//            }
-//
-//        })
-//    }
-
-
-//    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        buttonStartTracking.setOnClickListener { running = true }
-//    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val view: View =  inflater.inflate(R.layout.fragment_classic_mode, container, false)
 
@@ -129,15 +299,27 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
         val buttonStopTracking = view.findViewById<Button>(R.id.buttonStopTracking)
         val textViewStopWatch = view.findViewById<TextView>(R.id.textViewStopwatch)
 
+        textViewDistance = view.findViewById(R.id.textViewDistanceCounter)
+        textViewSpeed = view.findViewById(R.id.textViewSpeedCounter)
+        textViewAverageSpeed = view.findViewById(R.id.textViewAverageSpeedCounter)
+        textViewCalories = view.findViewById(R.id.textViewCaloriesCounter)
+        radioButtonWalk = view.findViewById(R.id.radioButtonWalkDistanceMode)
+        radioButtonRun = view.findViewById(R.id.radioButtonRunDistanceMode)
+        radioButtonBicycle = view.findViewById(R.id.radioButtonBicycleDistanceMode)
+
+
+
         if (running){
             val hours = seconds / 3600
             val minutes = seconds % 3600 / 60
             val secs = seconds % 60
 
             val time: String = java.lang.String
-                    .format(Locale.getDefault(),
-                            "%02d:%02d:%02d", hours,
-                            minutes, secs)
+                    .format(
+                        Locale.getDefault(),
+                        "%02d:%02d:%02d", hours,
+                        minutes, secs
+                    )
 
             textViewStopWatch.text = time
 
@@ -145,29 +327,39 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
             buttonStopTracking.isEnabled = true
         }
 
-
-
-
-
         buttonStartTracking.setOnClickListener {
 
+            if (isNewSession){
+                disactivateRadioButtons()
+                setFormOfActivity()
+            }
 
+            isNewSession = false
+
+//            getLastKnownLocation()
 
             if (running){
                 running = false
                 buttonStartTracking.text = getString(R.string.continue_tracking)
 
             }else{
-
+                //click start
                 if (isFinish){
                     isFinish = false
                     textViewStopWatch.text = getString(R.string.time_default)
-                    seconds = 0
-                }
+                    resetValues()
 
+                }
+//                currentLocationPoint = LocationPoint(lastLocation, seconds)
+//                Log.e("CurrentLocationPoint", lastLocation.altitude.toString())
+//                ///!!!!
+//                startLocationUpdates()
+//                ///!!!!
                 running = true
                 buttonStartTracking.text = getString(R.string.pause_tracking)
                 buttonStopTracking.isEnabled = true
+
+
             }
         }
 
@@ -175,34 +367,73 @@ class ClassicModeFragment : Fragment(), SensorEventListener {
 
             running = false
             isFinish = true
+            isNewSession = true
+
+            activateRadioButtons()
 
             buttonStartTracking.text = getString(R.string.start_tracking)
             buttonStopTracking.isEnabled = false
 
         }
 
-//        runTimer()
-
         return view
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        sManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_FASTEST)
     }
 
     override fun onStop() {
         super.onStop()
-//        sManager?.unregisterListener(this, stepSensor)
     }
 
-
-    override fun onSensorChanged(event: SensorEvent?) {
-        TODO("Not yet implemented")
+    fun convertSpeedFromKmHToMSec(speedPar: Float): Float{
+        return speedPar * 1000 / 3600
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        TODO("Not yet implemented")
+    fun convertSpeedFromMSecToKmH(speedPar: Float): Float{
+        return speedPar / 1000 * 3600
+    }
+
+    fun calculateCaloriesWalking(speedInSec: Float): Float{
+        val caloriesTemp: Float = if (speedInSec == 0f) 0f else ((0.035 * 60 + (speedInSec * speedInSec / 1.7) * 0.029 * 60)/60).toFloat()
+        return caloriesTemp
+    }
+
+    fun calculateCaloriesRunning(distancePar: Float): Float{
+        val caloriesTemp: Float = if (distancePar == 0f) 0f else (distancePar * 0.06).toFloat()
+        return caloriesTemp
+    }
+
+    fun calculateCaloriesBicycle(timePar: Int): Float{
+        val caloriesTemp: Float = if (timePar == 0) 0f else (0.175 * timePar).toFloat()
+        return caloriesTemp
+    }
+
+    fun resetValues(){
+        seconds = 0
+        distance = 0f
+        calories = 0f
+        speed = 0f
+    }
+
+    fun disactivateRadioButtons(){
+        radioButtonWalk.isClickable = false
+        radioButtonRun.isClickable = false
+        radioButtonBicycle.isClickable = false
+    }
+
+    fun activateRadioButtons(){
+        radioButtonWalk.isClickable = true
+        radioButtonRun.isClickable = true
+        radioButtonBicycle.isClickable = true
+    }
+
+    fun setFormOfActivity(){
+
+        if (radioButtonWalk.isChecked){
+            formOfActivity = FormOfActivity.WALK
+        }else if(radioButtonRun.isChecked){
+            formOfActivity = FormOfActivity.RUN
+        }else if (radioButtonBicycle.isChecked){
+            formOfActivity = FormOfActivity.BICYCLE
+        }
     }
 
 }

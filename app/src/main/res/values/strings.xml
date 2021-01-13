@@ -19,8 +19,8 @@
     <string name="time">time</string>
 
     <string name="default_distance">0 m</string>
-    <string name="default_speed">0 km/h</string>
-    <string name="default_avg_speed">0 km/h</string>
+    <string name="default_speed">0,0 km/h</string>
+    <string name="default_avg_speed">0,0 km/h</string>
     <string name="default_calories">0 kcal</string>
     <string name="activity">activity:</string>
 

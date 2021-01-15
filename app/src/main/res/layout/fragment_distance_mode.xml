@@ -13,10 +13,10 @@
         style="@style/MyTextViewTrackerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="128dp"
         android:text="@string/speed"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline20"
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <TextView
@@ -24,10 +24,10 @@
         style="@style/MyTextViewTrackerCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="92dp"
         android:text="@string/default_speed"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline20"
         app:layout_constraintTop_toBottomOf="@+id/textViewSpeedLabelDistanceMode" />
 
     <TextView
@@ -35,10 +35,10 @@
         style="@style/MyTextViewTrackerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="52dp"
         android:text="@string/average_speed"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline20"
         app:layout_constraintTop_toTopOf="@+id/guideline13" />
 
     <TextView
@@ -46,10 +46,10 @@
         style="@style/MyTextViewTrackerCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="92dp"
         android:text="@string/default_avg_speed"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline20"
         app:layout_constraintTop_toBottomOf="@+id/textViewAverageSpeedDistanceMode" />
 
     <TextView
@@ -140,7 +140,8 @@
 
         android:layout_marginTop="16dp"
         android:background="@color/my__black"
-        android:progress="80"
+        android:max="100"
+        android:progress="0"
         android:progressBackgroundTint="@color/my_light_black"
         android:progressTint="@color/my_orange"
         android:scrollbarSize="4dp"
@@ -282,5 +283,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="103dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="205dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

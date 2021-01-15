@@ -31,4 +31,5 @@
         android:textSize="55sp"
         app:layout_constraintStart_toEndOf="@+id/textViewWelcome1"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

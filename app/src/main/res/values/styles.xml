@@ -24,7 +24,6 @@
 
     <style name="MyTextViewTrackerLabel" parent="android:Widget.TextView">
         <item name="android:textColor">@color/my_orange</item>
-<!--        <item name="android:textStyle"></item>-->
         <item name="android:textSize">20sp</item>
     </style>
 
@@ -43,7 +42,5 @@
         <item name="colorControlActivated">@color/my_orange</item>
         <item name="colorControlHighlight">#FFFFFF</item>
     </style>
-
-
 
 </resources>

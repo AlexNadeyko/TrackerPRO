@@ -84,9 +84,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10">
 
-        <!--            android:onClick="onRadioButtonClicked"-->
-        <!--            android:text="@string/pirates" />-->
-
         <RadioButton
             android:id="@+id/radioButtonWalkDistanceMode"
             android:layout_width="40sp"
@@ -116,14 +113,12 @@
 
             android:background="@drawable/radio_button_selector_bicycle"
             android:button="@android:color/transparent" />
-        <!--            android:onClick="onRadioButtonClicked"-->
-        <!--            android:text="@string/ninjas" />-->
+
     </RadioGroup>
 
     <TextView
         android:id="@+id/textViewActivityDistanceMode"
         style="@style/MyTextViewTrackerLabel"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -137,7 +132,6 @@
         style="@style/MyProgressBar"
         android:layout_width="match_parent"
         android:layout_height="25sp"
-
         android:layout_marginTop="16dp"
         android:background="@color/my__black"
         android:max="100"
@@ -154,15 +148,12 @@
         android:id="@+id/editTextNumberDistance"
         android:layout_width="278dp"
         android:layout_height="52dp"
-
         android:layout_marginTop="4dp"
-
         android:ems="8"
         android:hint="@string/hint_enter_distance"
         android:inputType="number"
         android:textColor="@color/my_white"
         android:textColorHighlight="@color/my_orange"
-
         android:textColorHint="@color/my_grey"
         android:textColorLink="@color/my_orange"
         android:textCursorDrawable="@drawable/color_cursor"

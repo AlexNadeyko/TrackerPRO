@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonStartTracking"
+        android:id="@+id/buttonStartTrackingId"
         android:layout_width="303dp"
         android:layout_height="46dp"
         android:layout_marginTop="328dp"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewStopwatch" />
 
     <Button
-        android:id="@+id/buttonStopTracking"
+        android:id="@+id/buttonStopTrackingId"
         android:layout_width="303dp"
         android:layout_height="46dp"
         android:backgroundTint="@color/my_orange"
@@ -58,7 +58,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartTracking" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartTrackingId" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

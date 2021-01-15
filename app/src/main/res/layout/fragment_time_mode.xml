@@ -12,7 +12,7 @@
         style="@style/MyTextViewTrackerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/distance"
         android:textStyle="italic"
@@ -46,7 +46,7 @@
         style="@style/MyTextViewTrackerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="28dp"
         android:text="@string/calories"
         app:layout_constraintStart_toStartOf="@+id/guideline15"
@@ -57,7 +57,7 @@
         style="@style/MyTextViewTrackerCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="4dp"
         android:text="@string/default_avg_speed"
         app:layout_constraintStart_toStartOf="@+id/guideline15"
@@ -90,7 +90,7 @@
         style="@style/MyTextViewTrackerLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="24dp"
         android:text="@string/average_speed"
         app:layout_constraintStart_toStartOf="@+id/guideline15"
@@ -102,7 +102,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="24dp"
         android:text="@string/activity"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +160,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/buttonStopTrackingDistanceMode2"
+        android:id="@+id/buttonStopTrackingTimeMode"
         android:layout_width="303dp"
         android:layout_height="46dp"
         android:backgroundTint="@color/my_orange"
@@ -187,9 +187,9 @@
 
     <EditText
         android:id="@+id/editTextNumberHours"
-        android:layout_width="45dp"
+        android:layout_width="42dp"
         android:layout_height="59dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="12dp"
         android:ems="2"
         android:gravity="right"
@@ -276,9 +276,9 @@
 
     <EditText
         android:id="@+id/editTextNumberMinutes"
-        android:layout_width="43dp"
+        android:layout_width="42dp"
         android:layout_height="59dp"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="12dp"
         android:ems="2"
         android:gravity="right"
@@ -294,10 +294,10 @@
 
     <EditText
         android:id="@+id/editTextNumberSeconds"
-        android:layout_width="40dp"
+        android:layout_width="42dp"
         android:layout_height="58dp"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="12dp"
         android:ems="2"
         android:gravity="right"
         android:hint="@string/hint_default_part_time"
@@ -311,13 +311,14 @@
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarTimeMode"
         style="?android:progressBarStyleHorizontal"
-        android:layout_width="136dp"
-        android:layout_height="124dp"
+        android:layout_width="121dp"
+        android:layout_height="115dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
-        android:progress="80"
+        android:progress="0"
+        android:max="100"
         android:progressBackgroundTint="@color/my_white"
         android:progressDrawable="@drawable/circle"
         app:layout_constraintStart_toStartOf="parent"
@@ -328,7 +329,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="193dp" />
+        app:layout_constraintGuide_begin="170dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"

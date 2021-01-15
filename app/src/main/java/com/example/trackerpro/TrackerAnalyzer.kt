@@ -35,7 +35,7 @@ class TrackerAnalyzer constructor(var context: Context) {
         var distance: Float = 0f
 
         distance = oldLocationPoint.location.distanceTo(newLocationPoint.location)
-        Toast.makeText(context, "distance -$distance", Toast.LENGTH_LONG).show()
+//        Toast.makeText(context, "distance -$distance", Toast.LENGTH_LONG).show()
 
         return distance
     }

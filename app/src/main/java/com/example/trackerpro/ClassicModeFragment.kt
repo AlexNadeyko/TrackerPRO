@@ -132,7 +132,7 @@ class ClassicModeFragment : Fragment() {
                         Log.e("getLocationUpdates: secondlocation - ", location.latitude.toString() + " " + location.longitude.toString())
 
                     }
-                    Toast.makeText(context, "getLocationUpdates: " + location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, "getLocationUpdates: " + location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
 
 //                    Log.e("newLocationPoint", newLocationPoint.location.altitude.toString())
 
@@ -191,7 +191,7 @@ class ClassicModeFragment : Fragment() {
                 if (location != null) {
                     lastLocation = location
 //                val currentLatLng = LatLng(location.latitude, location.longitude)
-                    Toast.makeText(context, location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
                     Log.e("LastLocation", location.latitude.toString() + " " + location.longitude.toString())
                 }else{
                     Log.e("LastLocation", "null")
@@ -295,8 +295,8 @@ class ClassicModeFragment : Fragment() {
 
         val view: View =  inflater.inflate(R.layout.fragment_classic_mode, container, false)
 
-        val buttonStartTracking = view.findViewById<Button>(R.id.buttonStartTracking)
-        val buttonStopTracking = view.findViewById<Button>(R.id.buttonStopTracking)
+        val buttonStartTracking = view.findViewById<Button>(R.id.buttonStartTrackingId)
+        val buttonStopTracking = view.findViewById<Button>(R.id.buttonStopTrackingId)
         val textViewStopWatch = view.findViewById<TextView>(R.id.textViewStopwatch)
 
         textViewDistance = view.findViewById(R.id.textViewDistanceCounter)
@@ -348,6 +348,20 @@ class ClassicModeFragment : Fragment() {
                     isFinish = false
                     textViewStopWatch.text = getString(R.string.time_default)
                     resetValues()
+
+                    val distanceString: String = java.lang.String
+                            .format(
+                                    Locale.getDefault(),
+                                    "%.0f m", 0f
+                            )
+                    textViewDistance.text = distanceString
+
+                    val speedString: String = java.lang.String
+                            .format(
+                                    Locale.getDefault(),
+                                    "%.1f km/h", 0f
+                            )
+                    textViewSpeed.text = speedString
 
                 }
 //                currentLocationPoint = LocationPoint(lastLocation, seconds)

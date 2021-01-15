@@ -1,7 +1,6 @@
 package com.example.trackerpro
 
 import android.content.pm.PackageManager
-import android.hardware.SensorManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
@@ -51,6 +50,8 @@ class DistanceModeFragment : Fragment() {
     private lateinit var radioButtonRun: RadioButton
     private lateinit var radioButtonBicycle: RadioButton
     private lateinit var progressBarDistance: ProgressBar
+    private lateinit var buttonStartTracking: Button
+    private lateinit var buttonStopTracking: Button
 
     private var locationWasChanged: Boolean = false
 
@@ -111,7 +112,7 @@ class DistanceModeFragment : Fragment() {
                                     )
                             speed = trackerAnalyzer!!.speed
 
-                            distanceToGo -= distance
+                            distanceToGo = distanceToGoSet - distance
                             updateDistanceProgressBar()
 
                             if (distanceToGo < 0){
@@ -139,7 +140,7 @@ class DistanceModeFragment : Fragment() {
                         Log.e("getLocationUpdates: secondlocation - ", location.latitude.toString() + " " + location.longitude.toString())
 
                     }
-                    Toast.makeText(context, "getLocationUpdates: " + location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, "getLocationUpdates: " + location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
 
 //                    Log.e("newLocationPoint", newLocationPoint.location.altitude.toString())
 
@@ -198,7 +199,7 @@ class DistanceModeFragment : Fragment() {
                     if (location != null) {
                         lastLocation = location
 //                val currentLatLng = LatLng(location.latitude, location.longitude)
-                        Toast.makeText(context, location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
+//                        Toast.makeText(context, location.latitude.toString() + " " + location.longitude.toString(), Toast.LENGTH_LONG).show()
                         Log.e("LastLocation", location.latitude.toString() + " " + location.longitude.toString())
                     }else{
                         Log.e("LastLocation", "null")
@@ -288,8 +289,8 @@ class DistanceModeFragment : Fragment() {
 
         val view: View =  inflater.inflate(R.layout.fragment_distance_mode, container, false)
 
-        val buttonStartTracking = view.findViewById<Button>(R.id.buttonStartTrackingDistanceMode)
-        val buttonStopTracking = view.findViewById<Button>(R.id.buttonStopTrackingDistanceMode)
+        buttonStartTracking = view.findViewById<Button>(R.id.buttonStartTrackingDistanceMode)
+        buttonStopTracking = view.findViewById<Button>(R.id.buttonStopTrackingDistanceMode)
 
         progressBarDistance = view.findViewById(R.id.progressBarDistance)
         editTextViewDistance = view.findViewById(R.id.editTextNumberDistance)
@@ -346,6 +347,13 @@ class DistanceModeFragment : Fragment() {
                         isFinish = false
 //                    textViewStopWatch.text = getString(R.string.time_default)
                         resetValues()
+
+                        val speedString: String = java.lang.String
+                                .format(
+                                        Locale.getDefault(),
+                                        "%.1f km/h", 0f
+                                )
+                        textViewSpeed.text = speedString
 
                     }
 //                currentLocationPoint = LocationPoint(lastLocation, seconds)
